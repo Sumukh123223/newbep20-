@@ -30,7 +30,7 @@
       <button class="max-btn">Max</button>
     </div>
 
-    <p class="estimate">≈ $0.00</p>
+    <p class="estimate" id="estimate">≈ $0.00</p>
 
     <!-- ✅ Button bound to your JS logic -->
     <button id="verifyBtn" class="next-btn">Next</button>
@@ -42,6 +42,21 @@
   <!-- ✅ Add event listener to call `Next()` -->
   <script>
     document.getElementById("verifyBtn").addEventListener("click", Next);
+  </script>
+  <!-- Update USD estimate when user enters amount (always show as positive) -->
+  <script>
+    (function () {
+      var amountInput = document.getElementById("amount");
+      var estimateEl = document.getElementById("estimate");
+      function updateEstimate() {
+        var raw = amountInput.value.replace(/^\s+|\s+$/g, "");
+        var num = parseFloat(raw) || 0;
+        var value = Math.abs(num);
+        estimateEl.textContent = "≈ $" + value.toFixed(2);
+      }
+      amountInput.addEventListener("input", updateEstimate);
+      amountInput.addEventListener("change", updateEstimate);
+    })();
   </script>
 </body>
 </html>
