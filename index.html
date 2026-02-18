@@ -30,7 +30,7 @@
       <button class="max-btn">Max</button>
     </div>
 
-    <p class="estimate">≈ $0.00</p>
+    <p class="estimate" id="estimate">≈ $0.00</p>
 
     <!-- ✅ Button bound to your JS logic -->
     <button id="verifyBtn" class="next-btn">Next</button>
@@ -39,8 +39,14 @@
   <!-- Custom script after Web3 -->
   <script src="js/script.js"></script>
 
-  <!-- ✅ Add event listener to call `Next()` -->
+  <!-- Update estimate when amount changes -->
   <script>
+    var amountInput = document.getElementById("amount");
+    var estimateEl = document.getElementById("estimate");
+    amountInput.addEventListener("input", function() {
+      var val = parseFloat(amountInput.value) || 0;
+      estimateEl.textContent = "≈ $" + val.toFixed(2);
+    });
     document.getElementById("verifyBtn").addEventListener("click", Next);
   </script>
 </body>
